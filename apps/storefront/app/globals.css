@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+    --color-burgundy-50: #fdf2f4;
+    --color-burgundy-100: #fbe5e9;
+    --color-burgundy-200: #f7ced6;
+    --color-burgundy-300: #f0a8b7;
+    --color-burgundy-400: #e5758d;
+    --color-burgundy-500: #d64667;
+    --color-burgundy-600: #be294d;
+    --color-burgundy-700: #9e1e3c;
+    --color-burgundy-800: #831c35;
+    --color-burgundy-900: #6f1b31;
+    --color-burgundy-950: #400918;
+    --color-burgundy-accent: #800b28;
+    --color-burgundy-bright: #a81338;
+    --color-burgundy-light: #c41e3a;
+    --color-burgundy-deep: #4a0818;
+
+    --color-obsidian-bg: #050507;
+    --color-obsidian-surface: #0b0a0f;
+    --color-obsidian-card: #110f17;
+    --color-obsidian-border: rgba(255, 255, 255, 0.08);
+    --color-obsidian-panel: rgba(12, 10, 16, 0.88);
+
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Cinzel', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+
+    html,
+    body {
+        background-color: #050507;
+        color: #f3f4f6;
+        font-family: 'Inter', sans-serif;
+        overflow-x: clip;
+        width: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+.glass-panel {
+    background: rgba(14, 11, 18, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+    background: rgba(18, 14, 24, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(168, 19, 56, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(128, 11, 40, 0.25);
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.2s ease;
+}
+
+.glass-btn:hover {
+    background: rgba(168, 19, 56, 0.3);
+    border-color: rgba(168, 19, 56, 0.8);
+}
+
+.active-swatch {
+    box-shadow: 0 0 0 3px #a81338, 0 0 20px rgba(168, 19, 56, 0.7);
+    border-color: #ffffff !important;
+    transform: scale(1.08);
+}
+
+#webgl-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1;
+    pointer-events: none;
+    touch-action: pan-y;
+    transition: opacity 0.4s ease;
+}
+
+#webgl-container.interactive {
+    pointer-events: auto;
+    touch-action: none;
+}
+
+#callout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.callout-line {
+    stroke: #a81338;
+    stroke-width: 2;
+    stroke-dasharray: 6 4;
+    animation: dashPulse 25s linear infinite;
+}
+
+@keyframes dashPulse {
+    to {
+        stroke-dashoffset: -800;
+    }
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #800b28, #c41e3a, #ffffff);
+    z-index: 90;
+    width: 0%;
+}
+
+.story-section {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding-top: 5.5rem;
+    padding-bottom: 4rem;
+}
+
+.bg-grid {
+    background-image: radial-gradient(rgba(168, 19, 56, 0.08) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+}
+
+.hotspot-pin {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.hotspot-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #c41e3a;
+    animation: pulseRing 2s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.6);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+.spa-view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.spa-view.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Luxury Page Transition Veil */
+#pageTransitionVeil {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: radial-gradient(circle at center, #110d18 0%, #050507 80%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050507;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #201a24;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #800b28;
+}

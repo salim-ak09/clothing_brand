@@ -1,0 +1,22 @@
+{
+  "name": "scheduler",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "dependencies": {
+    "bull": "^4.12.0",
+    "dotenv": "^16.4.5",
+    "@opentelemetry/api": "^1.7.0",
+    "@opentelemetry/sdk-node": "^1.7.0",
+    "@opentelemetry/exporter-jaeger": "^1.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.2",
+    "ts-node-dev": "^2.0.0",
+    "@types/node": "^20.14.2"
+  }
+}

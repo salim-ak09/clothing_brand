@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Docker Compose file to run the full micro‑service stack locally with minimal supporting infrastructure (Redis, Postgres, Kafka/Zookeeper, Vault).",
+  "updatedAt": "2026-09-29T00:45:22.909607600Z"
+}

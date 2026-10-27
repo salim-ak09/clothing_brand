@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String?   @map("password_hash")
+  role          String    @default("CUSTOMER")
+  loyaltyTier   String?   @default("STANDARD") @map("loyalty_tier")
+  loyaltyPoints Int?      @default(0) @map("loyalty_points")
+  createdAt     DateTime? @default(now()) @map("created_at")
+  updatedAt     DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  // Profile Details
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  address       String?
+  city          String?
+  state         String?
+  postcode      String?
+
+  // 2FA & Security Settings
+  twoFaEnabled     Boolean? @default(false) @map("two_fa_enabled")
+  twoFaMethod      String?  @default("authenticator") @map("two_fa_method")
+  totpSecret       String?  @map("totp_secret")
+  telegramBotToken String?  @map("telegram_bot_token")
+  telegramChatId   String?  @map("telegram_chat_id")
+  smtpHost         String?  @map("smtp_host")
+  smtpPort         Int?     @map("smtp_port")
+  smtpUser         String?  @map("smtp_user")
+  smtpPass         String?  @map("smtp_pass")
+  twoFaEmail       String?  @map("two_fa_email")
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String           @id @default(uuid())
+  sku         String           @unique
+  title       String
+  slug        String           @unique
+  description String?
+  basePrice   Float            @map("base_price")
+  gsmDensity  Int              @default(450) @map("gsm_density")
+  fabricSpec  String?          @default("100% Combed Organic French Terry") @map("fabric_spec")
+  category    String
+  coverImage  String?          @map("cover_image")
+  images      String[]
+  isActive    Boolean?         @default(true) @map("is_active")
+  createdAt   DateTime?        @default(now()) @map("created_at")
+  assets      Product3DAsset[]
+  variants    ProductVariant[]
+
+  @@map("products")
+}
+
+model Product3DAsset {
+  id                String    @id @default(uuid())
+  productId         String?   @map("product_id")
+  glbLowPolyUrl     String    @map("glb_low_poly_url")
+  glbHighPolyUrl    String    @map("glb_high_poly_url")
+  normalMapUrl      String?   @map("normal_map_url")
+  roughnessMapUrl   String?   @map("roughness_map_url")
+  decalAnchorMatrix String?   @map("decal_anchor_matrix")
+  defaultCameraFov  Float?    @default(45.0) @map("default_camera_fov")
+  createdAt         DateTime? @default(now()) @map("created_at")
+  product           Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_3d_assets")
+}
+
+model ProductVariant {
+  id                String      @id @default(uuid())
+  productId         String?     @map("product_id")
+  skuVariant        String      @unique @map("sku_variant")
+  colorName         String      @map("color_name")
+  colorHex          String      @map("color_hex")
+  size              String
+  inventoryQuantity Int         @default(0) @map("inventory_quantity")
+  reservedQuantity  Int         @default(0) @map("reserved_quantity")
+  priceOverride     Float?      @map("price_override")
+  status            String?     @default("IN_STOCK")
+  product           Product?    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderItems        OrderItem[]
+
+  @@map("product_variants")
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  orderNumber     String      @unique @map("order_number")
+  userId          String?     @map("user_id")
+  status          String?     @default("PENDING")
+  currency        String?     @default("USD")
+  subtotal        Float
+  discountAmount  Float?      @default(0.00) @map("discount_amount")
+  shippingCost    Float?      @default(0.00) @map("shipping_cost")
+  taxAmount       Float?      @default(0.00) @map("tax_amount")
+  totalAmount     Float       @map("total_amount")
+  promoCodeUsed   String?     @map("promo_code_used")
+  paymentIntentId String?     @unique @map("payment_intent_id")
+  shippingAddress String      @map("shipping_address")
+  trackingNumber  String?     @map("tracking_number")
+  carrier         String?
+  notes           String?
+  createdAt       DateTime?   @default(now()) @map("created_at")
+  updatedAt       DateTime?   @default(now()) @updatedAt @map("updated_at")
+  user            User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  orderItems      OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id                  String          @id @default(uuid())
+  orderId             String?         @map("order_id")
+  variantId           String?         @map("variant_id")
+  customConfiguration String?         @map("custom_configuration")
+  quantity            Int
+  unitPrice           Float           @map("unit_price")
+  order               Order?          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant             ProductVariant? @relation(fields: [variantId], references: [id])
+
+  @@map("order_items")
+}

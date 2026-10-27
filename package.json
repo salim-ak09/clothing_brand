@@ -25,5 +25,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "html-react-parser": "^6.1.8"
+  }
 }

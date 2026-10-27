@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "GitHub Actions CI workflow for building and pushing Docker images",
+  "updatedAt": "2026-09-29T00:42:23.626346900Z"
+}

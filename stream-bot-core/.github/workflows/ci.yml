@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [api-gateway, orchestrator, scheduler, bot-runner, stealth-env, proxy-manager, risk-service]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies (Lerna bootstrap)
+        run: npm install && npx lerna bootstrap
+      - name: Build ${{ matrix.service }}
+        working-directory: ./apps/${{ matrix.service }}
+        run: |
+          npm run build
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/yourorg/stream-bot-core/${{ matrix.service }}:$(git rev-parse --short HEAD) ./apps/${{ matrix.service }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/yourorg/stream-bot-core/${{ matrix.service }}:$(git rev-parse --short HEAD)

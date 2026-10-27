@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-burgundy-50: #fdf2f4;
+  --color-burgundy-100: #fbe5e9;
+  --color-burgundy-200: #f7ced6;
+  --color-burgundy-300: #f0a8b7;
+  --color-burgundy-400: #e5758d;
+  --color-burgundy-500: #d64667;
+  --color-burgundy-600: #be294d;
+  --color-burgundy-700: #9e1e3c;
+  --color-burgundy-800: #831c35;
+  --color-burgundy-900: #6f1b31;
+  --color-burgundy-950: #400918;
+  --color-burgundy-accent: #800b28;
+  --color-burgundy-bright: #a81338;
+  --color-burgundy-light: #c41e3a;
+  --color-burgundy-deep: #4a0818;
+
+  --color-obsidian-bg: #050507;
+  --color-obsidian-surface: #0b0a0f;
+  --color-obsidian-card: #110f17;
+  --color-obsidian-border: rgba(255, 255, 255, 0.08);
+  --color-obsidian-panel: rgba(12, 10, 16, 0.88);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Cinzel', serif;
+  --font-serif: 'Cinzel', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+  
+  html, body {
+      background-color: #050507;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.glass-panel {
+    background: rgba(14, 11, 18, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+    background: rgba(18, 14, 24, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(168, 19, 56, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(128, 11, 40, 0.25);
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.2s ease;
+}
+
+.glass-btn:hover {
+    background: rgba(168, 19, 56, 0.3);
+    border-color: rgba(168, 19, 56, 0.8);
+}

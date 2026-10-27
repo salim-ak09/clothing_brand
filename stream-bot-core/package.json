@@ -1,0 +1,13 @@
+{
+  "name": "stream-bot-core",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*"
+  ],
+  "scripts": {
+    "bootstrap": "npm install && lerna bootstrap",
+    "build": "lerna run build",
+    "start": "lerna run start"
+  }
+}

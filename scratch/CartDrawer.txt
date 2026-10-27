@@ -1,0 +1,25 @@
+<div id="cartDrawer" className="fixed top-0 right-0 w-full sm:w-[380px] h-full z-50 glass-panel border-l border-white/10 p-5 flex flex-col justify-between transform translate-x-full transition-transform duration-300">
+        <div>
+            <div className="flex items-center justify-between pb-3.5 border-b border-white/10">
+                <div className="flex items-center space-x-2">
+                    <i data-lucide="shopping-bag" className="w-4 h-4 text-burgundy-bright"></i>
+                    <h3 className="font-bold font-display text-white text-sm">ATELIER BAG</h3>
+                </div>
+                <button onClick="closeCartDrawer()" className="p-1.5 text-gray-400 hover:text-white">
+                    <i data-lucide="x" className="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="cartItemsContainer" className="py-3 space-y-3 max-h-[60vh] overflow-y-auto pr-1"></div>
+        </div>
+
+        <div className="border-t border-white/10 pt-4 space-y-3">
+            <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-gray-400">SUBTOTAL:</span>
+                <span id="cartDrawerSubtotal" className="text-base font-bold text-white">$145.00</span>
+            </div>
+            <button onClick="closeCartDrawer(); navigateTo('checkout');" className="w-full bg-gradient-to-r from-burgundy-accent to-burgundy-bright hover:from-burgundy-bright hover:to-red-600 text-white font-bold py-3 rounded-xl font-mono text-xs tracking-widest uppercase flex items-center justify-center space-x-2 shadow-xl shadow-burgundy-accent/30 active:scale-95 transition-all">
+                <span>CHECKOUT</span>
+                <i data-lucide="arrow-right" className="w-4 h-4"></i>
+            </button>
+        </div>
+    </div><div id="cartDrawerBackdrop" onClick="closeCartDrawer()" className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>

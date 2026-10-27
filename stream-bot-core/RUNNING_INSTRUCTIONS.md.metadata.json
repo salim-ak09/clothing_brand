@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "User‑facing instructions for running the stack via Docker Compose and Kubernetes, plus a Makefile with shortcuts.",
+  "updatedAt": "2026-09-29T00:45:32.298411400Z"
+}

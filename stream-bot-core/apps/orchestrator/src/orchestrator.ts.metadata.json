@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Orchestrator service: BullMQ queue & worker for campaign execution, stub call to Bot Runner",
+  "updatedAt": "2026-09-29T00:53:47.647085800Z"
+}

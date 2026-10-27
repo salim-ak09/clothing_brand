@@ -1,0 +1,22 @@
+<div id="mobileMenu" className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col p-6 pt-24 space-y-5 transform translate-x-full transition-transform duration-300 lg:hidden">
+        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <span className="text-xs font-mono text-burgundy-bright uppercase tracking-widest font-bold">DIRECTORY</span>
+            <button onClick="toggleMobileMenu()" className="p-2 text-gray-400 hover:text-white">
+                <i data-lucide="x" className="w-6 h-6"></i>
+            </button>
+        </div>
+        <button onClick="navigateTo('home'); toggleMobileMenu()" className="text-left text-xl sm:text-2xl font-bold font-display text-white hover:text-burgundy-bright transition-colors">01 // 3D SHOWCASE</button>
+        <button onClick="navigateTo('shop'); toggleMobileMenu()" className="text-left text-xl sm:text-2xl font-bold font-display text-white hover:text-burgundy-bright transition-colors">02 // SHOP CATALOG</button>
+        <button onClick="navigateTo('about'); toggleMobileMenu()" className="text-left text-xl sm:text-2xl font-bold font-display text-white hover:text-burgundy-bright transition-colors">03 // ABOUT THE ATELIER</button>
+        <button onClick="navigateTo('profile'); toggleMobileMenu()" className="text-left text-xl sm:text-2xl font-bold font-display text-white hover:text-burgundy-bright transition-colors">04 // USER PROFILE</button>
+        <button onClick="navigateTo('checkout'); toggleMobileMenu()" className="text-left text-xl sm:text-2xl font-bold font-display text-white hover:text-burgundy-bright transition-colors">05 // ORDER CHECKOUT</button>
+        
+        <div className="pt-6 border-t border-white/10 flex flex-col space-y-3">
+            <button onClick="toggleAiAssistant(); toggleMobileMenu()" className="w-full py-3 bg-burgundy-bright/20 border border-burgundy-bright/50 rounded-xl font-mono text-xs text-white uppercase tracking-wider flex items-center justify-center space-x-2">
+                <i data-lucide="sparkles" className="w-4 h-4 text-burgundy-bright animate-spin"></i>
+                <span>CONSULT AI STYLIST</span>
+            </button>
+            <button onClick="toggleAuthModal(); toggleMobileMenu()" className="w-full py-3 glass-btn rounded-xl font-mono text-xs text-white uppercase tracking-wider">LOGIN / REGISTER</button>
+            <div className="text-center text-[10px] font-mono text-gray-500">AETHER DIGITAL ATELIER • 450GSM</div>
+        </div>
+    </div>
